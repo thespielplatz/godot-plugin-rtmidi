@@ -19,6 +19,14 @@ config/name="Empty"
 run/main_scene="res://Playground.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+RTMidi="*res://addons/tsp-gp-rtmidi/RTMidi.gd"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "tsp-gp-rtmidi" )
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

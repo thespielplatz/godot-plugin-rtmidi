@@ -3,23 +3,23 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$LibNode.connect("error", self, "_on_midi_error")
-	$LibNode.connect("log", self, "_on_midi_log")
-	$LibNode.connect("midi_in_callback", self, "_midi_event")
+	RTMidi.connect("error", self, "on_midi_error")
+	RTMidi.connect("log", self, "on_midi_log")
+	RTMidi.connect("midi_in_callback", self, "midi_event")
 	
-	print("RTMidi Version: " + $LibNode.getVersion())
+	print("RTMidi Version: " + RTMidi.get_version())
 	
 	print("Input Ports:")
-	var ports = $LibNode.getInputPortCount()
+	var ports = RTMidi.get_input_port_count()
 	for i in range(ports):
-		print("[" + str(i) + "] " + $LibNode.getInputPortName(i))
+		print("[" + str(i) + "] " + RTMidi.get_input_port_name(i))
 		
 	print("Output Ports:")
-	ports = $LibNode.getOutputPortCount()
+	ports = RTMidi.get_output_port_count()
 	for i in range(ports):
-		print("[" + str(i) + "] " + $LibNode.getOutputPortName(i))
+		print("[" + str(i) + "] " + RTMidi.get_output_port_name(i))
 	
-	$LibNode.openOutputPort(0)
+	RTMidi.open_output_port(0)
 	
 
 func _on_midi_error(part, message):
@@ -41,6 +41,6 @@ var on = false
 func _on_Blink_pressed():
 	on = !on
 	if on:
-		$LibNode.sendMessage(0x90,0x02,0x7F)
+		RTMidi.send_message(0x90,0x02,0x7F)
 	else:
-		$LibNode.sendMessage(0x90,0x02,0x0)
+		RTMidi.send_message(0x90,0x02,0x0)
