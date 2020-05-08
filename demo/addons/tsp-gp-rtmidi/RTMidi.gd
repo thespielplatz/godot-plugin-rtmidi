@@ -2,8 +2,8 @@ extends Node
 
 var rtmidi;
 
-signal on_midi_error(part, message)
-signal on_midi_log(part, message)
+signal midi_error(part, message)
+signal midi_log(part, message)
 signal midi_event(deltatime, message1, message2, message3)
 
 func _ready():
