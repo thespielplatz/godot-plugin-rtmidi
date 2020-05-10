@@ -30,7 +30,6 @@ public:
 	void openInputPort(int i);
 	void closeInputPort();
 	bool isInputPortOpen();
-	//void midiInCallback( double deltatime, std::vector< unsigned char > *message, void *userData );
 
 	int getOutputPortCount();
 	godot::String getOutputPortName(int i);

@@ -20,6 +20,7 @@ func _ready():
 		print("[" + str(i) + "] " + RTMidi.get_output_port_name(i))
 	
 	RTMidi.open_output_port(0)
+	RTMidi.open_input_port(1)
 	
 
 func _on_midi_error(part, message):
@@ -30,8 +31,12 @@ func _on_midi_log(part, message):
 	print("Plugin Log: " + part)
 	print(message)
 	
-func _on_midi_event(deltatime, message1, message2, message3):
-	print("MidiEvent: " + str(message1) + "|" + str(message2) + "|" + str(message3))
+func _on_midi_event(deltatime, event: InputEventMIDI):
+	if event.message == RTMidi.CONTROL_CHANGE:
+		print("Channel:" + str(event.channel) + " Message:" + str(event.message) + " controller_number:" + str(event.controller_number) + " controller_number:" + str(event.controller_value))
+	else:
+		print("Channel:" + str(event.channel) + " Message:" + str(event.message) + " Pitch:" + str(event.pitch) + " Velocity:" + str(event.velocity))
+	#print("MidiEvent: " + str(message1) + "|" + str(message2) + "|" + str(message3))
 
 func _on_Button_pressed():
 	pass
